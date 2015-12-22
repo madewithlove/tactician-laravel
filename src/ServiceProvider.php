@@ -7,6 +7,7 @@ use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
 use League\Tactician\Plugins\LockingMiddleware;
+use Madewithlove\Tactician\Middlewares\TransactionMiddleware;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -21,6 +22,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             $middlewares = [];
 
             $middlewares[] = new LockingMiddleware();
+            $middlewares[] = $this->app->make(TransactionMiddleware::class);
             $middlewares[] = new CommandHandlerMiddleware(
                 new ClassNameExtractor(),
                 new ContainerLocator($this->app),

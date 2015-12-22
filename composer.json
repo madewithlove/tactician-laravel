@@ -1,6 +1,6 @@
 {
     "name": "madewithlove/tactician-laravel",
-    "description": "A wrapper arround",
+    "description": "Integrate tactician with Laravel 5",
     "license": "MIT",
     "keywords": [
         "laravel"
@@ -14,6 +14,7 @@
     "require": {
         "php": ">=5.5.9",
         "illuminate/container": "^5.0|^5.1|^5.2",
+        "illuminate/database": "^5.0|^5.1|^5.2",
         "illuminate/support": "^5.0|^5.1|^5.2",
         "league/tactician": "^0.6.1"
     },
