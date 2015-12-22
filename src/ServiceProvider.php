@@ -27,6 +27,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
             return new CommandBus($middlewares);
         });
+
+        $this->app->alias(CommandBus::class, 'bus');
     }
 
     /**
@@ -36,6 +38,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         return [
             CommandBus::class,
+            'bus',
         ];
     }
 }
