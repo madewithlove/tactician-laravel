@@ -3,11 +3,17 @@
 namespace Madewithlove\Tactician\Middlewares;
 
 use Illuminate\Database\DatabaseManager;
+use Madewithlove\Tactician\Contracts\IgnoresRollback;
 use Madewithlove\Tactician\TestCase;
 use Mockery;
 use Mockery\MockInterface;
 use stdClass;
 use Exception;
+
+class IgnoredException extends Exception implements IgnoresRollback
+{
+
+}
 
 class TransactionMiddlewareTest extends TestCase
 {
@@ -45,6 +51,25 @@ class TransactionMiddlewareTest extends TestCase
 
         $next = function () use (&$executed) {
             throw new Exception('command failed');
+        };
+
+        $middleware->execute(new stdClass(), $next);
+    }
+
+    public function testCanIgnoreRollback()
+    {
+        $database = Mockery::mock(DatabaseManager::class, function (MockInterface $mock) {
+            $mock->shouldReceive('beginTransaction')->once();
+            $mock->shouldReceive('commit')->once();
+            $mock->shouldReceive('rollback')->never();
+        });
+
+        $this->setExpectedException(IgnoredException::class, 'command failed');
+
+        $middleware = new TransactionMiddleware($database);
+
+        $next = function () use (&$executed) {
+            throw new IgnoredException('command failed');
         };
 
         $middleware->execute(new stdClass(), $next);

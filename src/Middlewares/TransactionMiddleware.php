@@ -5,6 +5,7 @@ namespace Madewithlove\Tactician\Middlewares;
 use League\Tactician\Middleware;
 use Exception;
 use Illuminate\Database\DatabaseManager;
+use Madewithlove\Tactician\Contracts\IgnoresRollback;
 
 class TransactionMiddleware implements Middleware
 {
@@ -33,11 +34,16 @@ class TransactionMiddleware implements Middleware
         $this->database->beginTransaction();
         try {
             $returnValue = $next($command);
+            $this->database->commit();
         } catch (Exception $exception) {
-            $this->database->rollback();
+            if ($exception instanceof IgnoresRollback) {
+                $this->database->commit();
+            } else {
+                $this->database->rollback();
+            }
+
             throw $exception;
         }
-        $this->database->commit();
         return $returnValue;
     }
 }
