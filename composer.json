@@ -1,0 +1,37 @@
+{
+    "name": "madewithlove/tactician-laravel",
+    "description": "A wrapper arround",
+    "license": "MIT",
+    "keywords": [
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Madewithlove",
+            "email": "heroes@madewithlove.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "2.0.*@dev",
+        "phpunit/phpunit": "^4.7",
+        "mockery/mockery": "^0.9.4",
+        "symfony/var-dumper": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Madewithlove\\Tactician\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Madewithlove\\Tactician\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "lint": "php-cs-fixer fix"
+    }
+}
