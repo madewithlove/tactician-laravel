@@ -77,7 +77,21 @@ class CalculatePriceForQuantity
 }
 ```
 
+#### Overriding the command handling logic
 
+If you're not happy with the default logic shipped in this package you can overwrite it easily by
+rebinding the  `League\Tactician\Handler\CommandHandlerMiddleware`. You do this by adding the following to your
+application's service provider, refer to [Tactician's documentation](http://tactician.thephpleague.com/tweaking-tactician/)
+for options.
+
+```php
+public function register()
+{
+    $this->app->bind(CommandHandlerMiddleware::class, function () {
+        // Return your own implementation of CommandHandlerMiddleware here.
+    });
+}
+```
 
 ## Testing
 
