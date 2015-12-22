@@ -93,6 +93,22 @@ public function register()
 }
 ```
 
+## Middlewares
+
+This package includes a couple middlewares specific to Laravel, you can choose to use these.
+
+### `TransactionMiddleware`
+
+This middleware is included by default. It means all your commands are handled inside of a database transaction, and
+if an error occurs it will rollback the transaction.
+
+It's quite common for a command to throw an exception that is caught higher up the chain so a certain action can be performed
+(such as displaying an error message) but still perform some kind of database interaction. For cases such as this you can make use of
+the `Madewithlove\Tactician\Contracts\IgnoresRollback` interface. Simply implement it on your exception and no rollbacks will be performed!
+
+__Note__: This middleware only runs the main database connection in a transaction, if you use multiple connections you will need
+to come up with a custom solution.
+
 ## Testing
 
 ``` bash
