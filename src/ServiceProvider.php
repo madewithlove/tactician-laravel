@@ -6,11 +6,14 @@ use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
-use League\Tactician\Plugins\LockingMiddleware;
-use Madewithlove\Tactician\Middlewares\TransactionMiddleware;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
+    /**
+     * @var bool
+     */
+    protected $defer = false;
+
     /**
      * Register the service provider.
      *
@@ -18,16 +21,26 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(CommandBus::class, function () {
-            $middlewares = [];
+        $configPath = __DIR__ . '/config/tactician.php';
+        $this->mergeConfigFrom($configPath, 'tactician');
 
-            $middlewares[] = new LockingMiddleware();
-            $middlewares[] = $this->app->make(TransactionMiddleware::class);
-            $middlewares[] = new CommandHandlerMiddleware(
+        $this->app->bind(CommandHandlerMiddleware::class, function () {
+            return new CommandHandlerMiddleware(
                 new ClassNameExtractor(),
                 new ContainerLocator($this->app),
                 new HandleInflector()
             );
+        });
+
+        $this->app->bind(CommandBus::class, function () {
+            $middlewares = array_map(function ($depencency) {
+                if (is_string($depencency)) {
+                    return $this->app->make($depencency);
+                }
+
+                return $depencency;
+
+            }, config('tactician.middlewares', []));
 
             return new CommandBus($middlewares);
         });
@@ -36,11 +49,22 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     }
 
     /**
+     *
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__.'/config/tactician.php' => config_path('tactician.php'),
+        ]);
+    }
+
+    /**
      * @return array
      */
     public function provides()
     {
         return [
+            CommandHandlerMiddleware::class,
             CommandBus::class,
             'bus',
         ];
