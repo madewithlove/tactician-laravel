@@ -8,7 +8,7 @@
 
 ## Introduction
 
-This packages is a replacement for Laravel 5's default command bus using [tactician](tactician.thephpleague.com).
+This packages is a replacement for Laravel 5's default command bus using [tactician](http://tactician.thephpleague.com).
 
 ### Default middleware
 
