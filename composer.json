@@ -16,7 +16,7 @@
         "illuminate/container": "^5.0|^5.1|^5.2",
         "illuminate/database": "^5.0|^5.1|^5.2",
         "illuminate/support": "^5.0|^5.1|^5.2",
-        "league/tactician": "^0.6.1"
+        "league/tactician": "^1.0"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "2.0.*@dev",
