@@ -20,4 +20,22 @@ return [
         TransactionMiddleware::class,
         CommandHandlerMiddleware::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Replacements
+    |--------------------------------------------------------------------------
+    |
+    | The ContainerLocator provided by this package will match your commands
+    | to your handlers by replacing part of the command namespace.
+    |
+    | Use this config to customize what to look in the Command namespace and
+    | what to replace it with.
+    |
+    */
+
+    'replacements' => [
+        'origin' => 'Jobs',
+        'target' => 'Listeners',
+    ]
 ];

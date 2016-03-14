@@ -32,4 +32,12 @@ class ContainerLocatorTest extends TestCase
 
         $this->assertInstanceOf(Dummies\Nested\Listeners\Foo::class, $handler);
     }
+
+    public function testCanHaveCustomOriginAndTargetFolders()
+    {
+        $locator = new ContainerLocator(new Container(), 'Commands', 'Handlers');
+        $handler = $locator->getHandlerForCommand('Madewithlove\Tactician\Dummies\Commands\Foo');
+
+        $this->assertInstanceOf(Dummies\Handlers\Foo::class, $handler);
+    }
 }

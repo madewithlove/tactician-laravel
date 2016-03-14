@@ -14,11 +14,25 @@ class ContainerLocator implements HandlerLocator
     protected $container;
 
     /**
-     * @param Container $container
+     * @var string
      */
-    public function __construct(Container $container)
+    private $origin;
+
+    /**
+     * @var string
+     */
+    private $target;
+
+    /**
+     * @param Container $container
+     * @param string    $origin
+     * @param string    $target
+     */
+    public function __construct(Container $container, $origin = 'Jobs', $target = 'Listeners')
     {
         $this->container = $container;
+        $this->origin    = $origin;
+        $this->target    = $target;
     }
 
     /**
@@ -28,7 +42,7 @@ class ContainerLocator implements HandlerLocator
      */
     public function getHandlerForCommand($commandName)
     {
-        $handlerName = str_replace('Jobs', 'Listeners', $commandName);
+        $handlerName = str_replace($this->origin, $this->target, $commandName);
 
         if (!class_exists($handlerName)) {
             throw MissingHandlerException::forCommand($commandName);
