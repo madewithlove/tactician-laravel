@@ -25,9 +25,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->mergeConfigFrom($configPath, 'tactician');
 
         $this->app->bind(CommandHandlerMiddleware::class, function () {
+            /** @var \Illuminate\Contracts\Config\Repository $config */
+            $config = $this->app['config'];
+
             return new CommandHandlerMiddleware(
                 new ClassNameExtractor(),
-                new ContainerLocator($this->app),
+                new ContainerLocator(
+                    $this->app,
+                    $config->get('tactician.replacements.origin', 'Jobs'),
+                    $config->get('tactician.replacements.target', 'Listeners')
+                ),
                 new HandleInflector()
             );
         });
