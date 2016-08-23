@@ -13,9 +13,9 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/container": "^5.0|^5.1|^5.2",
-        "illuminate/database": "^5.0|^5.1|^5.2",
-        "illuminate/support": "^5.0|^5.1|^5.2",
+        "illuminate/container": "^5.0|^5.1|^5.2|^5.3",
+        "illuminate/database": "^5.0|^5.1|^5.2|^5.3",
+        "illuminate/support": "^5.0|^5.1|^5.2|^5.3",
         "league/tactician": "^1.0"
     },
     "require-dev": {
