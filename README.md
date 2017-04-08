@@ -38,7 +38,7 @@ Add the service provider to `config/app.php`:
 Madewithlove\Tactician\ServiceProvider::class,
 ```
 
-In case you want to tweak the middlewares you should publish the package configuration:
+In case you want to tweak the middleware you should publish the package configuration:
 
 ```php
 php artisan vendor:publish --provider="Madewithlove\Tactician\ServiceProvider"
@@ -93,9 +93,9 @@ public function register()
 }
 ```
 
-## Middlewares
+## Middleware
 
-This package includes a couple middlewares specific to Laravel, you can choose to use these.
+This package includes a couple middleware specific to Laravel, you can choose to use these.
 
 ### `TransactionMiddleware`
 
