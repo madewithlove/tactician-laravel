@@ -32,6 +32,8 @@ All command handlers are resolved out of the [container](http://laravel.com/docs
 $ composer require madewithlove/tactician-laravel
 ```
 
+### Laravel <= 5.4
+
 Add the service provider to `config/app.php`:
 
 ```php
