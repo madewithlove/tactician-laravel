@@ -11,7 +11,8 @@ class ContainerLocatorTest extends TestCase
 {
     public function testCanTriggerExceptionWhenHandlerCannotBeFound()
     {
-        $this->setExpectedException(MissingHandlerException::class, 'Missing handler for command Jobs\Bar');
+        $this->expectException(MissingHandlerException::class);
+        $this->expectExceptionMessage('Missing handler for command Jobs\Bar');
 
         $locator = new ContainerLocator(new Container());
         $locator->getHandlerForCommand('Jobs\Bar');

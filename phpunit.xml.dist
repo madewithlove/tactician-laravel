@@ -8,8 +8,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false"
-    >
+>
 
     <filter>
         <whitelist>
@@ -22,7 +21,7 @@
     </filter>
 
     <testsuites>
-        <testsuite name="Arrounded Test Suite">
+        <testsuite name="Test Suite">
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>

@@ -2,12 +2,11 @@
 
 namespace Madewithlove\Tactician;
 
-use PHPUnit_Framework_TestCase;
 use Mockery;
 
-abstract class TestCase extends PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Mockery::close();
     }

@@ -3,6 +3,7 @@
 namespace Madewithlove\Tactician\Middlewares;
 
 use Illuminate\Database\DatabaseManager;
+use League\Tactician\Exception\MissingHandlerException;
 use Madewithlove\Tactician\Contracts\IgnoresRollback;
 use Madewithlove\Tactician\TestCase;
 use Mockery;
@@ -45,7 +46,8 @@ class TransactionMiddlewareTest extends TestCase
             $mock->shouldReceive('rollback')->once();
         });
 
-        $this->setExpectedException(Exception::class, 'command failed');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('command failed');
 
         $middleware = new TransactionMiddleware($database);
 
@@ -64,7 +66,8 @@ class TransactionMiddlewareTest extends TestCase
             $mock->shouldReceive('rollback')->never();
         });
 
-        $this->setExpectedException(IgnoredException::class, 'command failed');
+        $this->expectException(IgnoredException::class);
+        $this->expectExceptionMessage('command failed');
 
         $middleware = new TransactionMiddleware($database);
 
