@@ -24,21 +24,18 @@ class ContainerLocator implements HandlerLocator
     private $target;
 
     /**
-     * @param Container $container
      * @param string    $origin
      * @param string    $target
      */
     public function __construct(Container $container, $origin = 'Jobs', $target = 'Listeners')
     {
         $this->container = $container;
-        $this->origin    = $origin;
-        $this->target    = $target;
+        $this->origin = $origin;
+        $this->target = $target;
     }
 
     /**
      * @param string $commandName
-     *
-     * @return mixed
      */
     public function getHandlerForCommand($commandName)
     {

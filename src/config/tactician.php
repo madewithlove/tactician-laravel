@@ -1,7 +1,7 @@
 <?php
 
-use League\Tactician\Plugins\LockingMiddleware;
 use League\Tactician\Handler\CommandHandlerMiddleware;
+use League\Tactician\Plugins\LockingMiddleware;
 use Madewithlove\Tactician\Middlewares\TransactionMiddleware;
 
 return [
@@ -37,5 +37,5 @@ return [
     'replacements' => [
         'origin' => 'Jobs',
         'target' => 'Listeners',
-    ]
+    ],
 ];

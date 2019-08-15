@@ -2,9 +2,9 @@
 
 namespace Madewithlove\Tactician\Middlewares;
 
-use League\Tactician\Middleware;
 use Exception;
 use Illuminate\Database\DatabaseManager;
+use League\Tactician\Middleware;
 use Madewithlove\Tactician\Contracts\IgnoresRollback;
 
 class TransactionMiddleware implements Middleware
@@ -14,9 +14,6 @@ class TransactionMiddleware implements Middleware
      */
     protected $database;
 
-    /**
-     * @param DatabaseManager $database
-     */
     public function __construct(DatabaseManager $database)
     {
         $this->database = $database;
@@ -24,9 +21,7 @@ class TransactionMiddleware implements Middleware
 
     /**
      * @param object $command
-     * @param callable $next
      *
-     * @return mixed
      * @throws Exception
      */
     public function execute($command, callable $next)
@@ -44,6 +39,7 @@ class TransactionMiddleware implements Middleware
 
             throw $exception;
         }
+
         return $returnValue;
     }
 }

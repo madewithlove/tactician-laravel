@@ -16,12 +16,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $configPath = __DIR__ . '/config/tactician.php';
+        $configPath = __DIR__.'/config/tactician.php';
         $this->mergeConfigFrom($configPath, 'tactician');
 
         $this->app->bind(CommandHandlerMiddleware::class, function () {
@@ -46,7 +44,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 }
 
                 return $depencency;
-
             }, config('tactician.middlewares', []));
 
             return new CommandBus($middlewares);
@@ -55,20 +52,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->alias(CommandBus::class, 'bus');
     }
 
-    /**
-     *
-     */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__.'/config/tactician.php' => config_path('tactician.php'),
         ]);
     }
 
-    /**
-     * @return array
-     */
-    public function provides()
+    public function provides(): array
     {
         return [
             CommandHandlerMiddleware::class,
