@@ -2,6 +2,10 @@
 
 ### Unreleased
 
+### Added
+
+- Support for Laravel 6 and 7
+
 ### [1.0.2] -2016-08-23
 
 ### Added
