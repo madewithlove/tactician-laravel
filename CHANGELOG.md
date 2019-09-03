@@ -1,5 +1,20 @@
 # CHANGELOG
 
+### Unreleased
+
+### [1.0.2] -2016-08-23
+
+### Added
+
+- Support for Laravel's package discovery
+- Support for Laravel 5.4, 5.5 and 5.6
+
+### [1.0.1] -2016-08-23
+
+### Added
+
+- Added support for Laravel 5.3
+
 ### [1.0.0] - 2016-03-14
 
 ### Added
