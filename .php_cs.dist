@@ -1,6 +1,10 @@
 <?php
+
 require 'vendor/autoload.php';
 
-return Madewithlove\PhpCsFixer\Config::fromFolders(['src'], '7.1')->mergeRules([
-    'phpdoc_align' => false,
-]);
+return Madewithlove\PhpCsFixer\Config::fromFolders(['src'], '7.1')
+    ->mergeRules(
+        [
+            'phpdoc_align' => false,
+        ]
+    );
